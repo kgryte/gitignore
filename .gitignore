@@ -1,7 +1,7 @@
 
 # Directories #
 ###############
-node_modules/
+
 
 # Compiled source #
 ###################
@@ -46,6 +46,10 @@ Desktop.ini
 # Temporary files #
 ###################
 *~
+
+# Node.js #
+###########
+node_modules/
 
 # Matlab #
 ##########
