@@ -1,0 +1,23 @@
+{
+	"string": [
+		"template"
+	],
+	"boolean": [
+		"help",
+		"version"
+	],
+	"alias": {
+		"help": [
+			"h"
+		],
+		"version": [
+			"V"
+		],
+		"port": [
+			"p"
+		],
+		"template": [
+			"tmpl"
+		]
+	}
+}
