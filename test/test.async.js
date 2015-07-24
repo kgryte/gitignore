@@ -16,7 +16,7 @@ var // Expectation library:
 	fs = require( 'fs' ),
 
 	// Module to be tested:
-	cp = require( './../lib/sync.js' );
+	cp = require( './../lib/async.js' );
 
 
 // VARIABLES //
@@ -27,10 +27,17 @@ var expect = chai.expect,
 
 // TESTS //
 
-describe( 'sync', function tests() {
+describe( 'async', function tests() {
 
 	it( 'should export a function', function test() {
 		expect( cp ).to.be.a( 'function' );
+	});
+
+	it( 'should throw an error if not provided a destination', function test() {
+		expect( foo ).to.throw( Error );
+		function foo() {
+			cp();
+		}
 	});
 
 	it( 'should throw an error if not provided a valid destination directory', function test() {
@@ -64,7 +71,35 @@ describe( 'sync', function tests() {
 			undefined,
 			NaN,
 			[],
-			function(){}
+			// function(){} // allowed as fcn is variadic
+		];
+
+		for ( var i = 0; i < values.length; i++ ) {
+			expect( badValue1( values[i] ) ).to.throw( TypeError );
+			expect( badValue2( values[i] ) ).to.throw( TypeError );
+		}
+		function badValue1( value ) {
+			return function() {
+				cp( './beep/boop', value );
+			};
+		}
+		function badValue2( value ) {
+			return function() {
+				cp( './beep/boop', value, function(){} );
+			};
+		}
+	});
+
+	it( 'should throw an error if provided a callback argument which is not a function', function test() {
+		var values = [
+			'beep',
+			5,
+			null,
+			true,
+			undefined,
+			NaN,
+			[],
+			{}
 		];
 
 		for ( var i = 0; i < values.length; i++ ) {
@@ -72,7 +107,7 @@ describe( 'sync', function tests() {
 		}
 		function badValue( value ) {
 			return function() {
-				cp( './beep/boop', value );
+				cp( './beep/boop', {}, value );
 			};
 		}
 	});
@@ -121,49 +156,110 @@ describe( 'sync', function tests() {
 	});
 
 	it( 'should create a .gitignore file in a specified directory', function test() {
-		var dirpath,
-			bool;
+		var dirpath;
+
+		dirpath = path.resolve( __dirname, '../build/' + new Date().getTime() );
+
+		mkdirp.sync( dirpath );
+		cp( dirpath, onFinish );
+
+		function onFinish( error ) {
+			if ( error ) {
+				assert.ok( false );
+				return;
+			}
+			var bool = fs.existsSync( path.join( dirpath, '.gitignore' ) );
+
+			assert.isTrue( bool );
+		}
+	});
+
+	it( 'should pass any write errors to a provided callback', function test() {
+		var dirpath;
+
+		dirpath = path.resolve( __dirname, '../build/' + new Date().getTime() );
+
+		cp( dirpath, onFinish );
+
+		function onFinish( error ) {
+			if ( error ) {
+				assert.ok( true );
+				return;
+			}
+			assert.ok( false );
+		}
+	});
+
+	it( 'should create a .gitignore file in a specified directory without requiring a callback', function test() {
+		var dirpath;
 
 		dirpath = path.resolve( __dirname, '../build/' + new Date().getTime() );
 
 		mkdirp.sync( dirpath );
 		cp( dirpath );
 
-		bool = fs.existsSync( path.join( dirpath, '.gitignore' ) );
+		setTimeout( onTimeout, 500 );
 
-		assert.isTrue( bool );
+		function onTimeout() {
+			var bool = fs.existsSync( path.join( dirpath, '.gitignore' ) );
+
+			assert.isTrue( bool );
+		}
 	});
 
 	it( 'should create a .gitignore file using a specified template', function test() {
-		var dirpath,
-			bool;
+		var dirpath;
 
 		dirpath = path.resolve( __dirname, '../build/' + new Date().getTime() );
 
 		mkdirp.sync( dirpath );
 		cp( dirpath, {
 			'template': 'default'
-		});
+		}, onFinish );
 
-		bool = fs.existsSync( path.join( dirpath, '.gitignore' ) );
+		function onFinish( error ) {
+			var fpath1,
+				fpath2,
+				f1, f2,
+				bool;
 
-		assert.isTrue( bool );
+			if ( error ) {
+				assert.ok( false );
+				return;
+			}
+			bool = fs.existsSync(  );
+
+			assert.isTrue( bool );
+
+			fpath1 = path.join( dirpath, '.gitignore' );
+			f1 = fs.readFileSync( fpath1 );
+
+			fpath2 = path.join( path.resolve( __dirname, '../lib/default' ), '.gitignore' );
+			f2 = fs.readFileSync( fpath2 );
+
+			assert.strictEqual( f1, f2 );
+		}
 	});
 
 	it( 'should ignore any unrecognized options', function test() {
-		var dirpath,
-			bool;
+		var dirpath;
 
 		dirpath = path.resolve( __dirname, '../build/' + new Date().getTime() );
 
 		mkdirp.sync( dirpath );
 		cp( dirpath, {
 			'beep': 'boop'
-		});
+		}, onFinish );
 
-		bool = fs.existsSync( path.join( dirpath, '.gitignore' ) );
+		function onFinish( error ) {
+			if ( error ) {
+				assert.ok( false );
+				return;
+			}
+			var bool = fs.existsSync( path.join( dirpath, '.gitignore' ) );
 
-		assert.isTrue( bool );
+			assert.isTrue( bool );
+		}
 	});
 
 });
