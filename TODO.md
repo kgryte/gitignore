@@ -1,6 +1,5 @@
 TODO
 ====
 
-1. tests
-2. Turn on coverage
-3. 
+1. Turn on coverage
+2. 

@@ -20,7 +20,7 @@ var cp = require( '@kgryte/gitignore' );
 
 #### cp( dest[, opts ][, clbk ] )
 
-Asynchronously creates a `.gitignore` file in a specified `destination` directory.
+Asynchronously create a `.gitignore` file in a specified `destination` directory.
 
 ``` javascript
 cp( 'path/to/a/directory', onCreate );
@@ -48,7 +48,7 @@ cp( 'path/to/a/directory', {
 
 #### cp.sync( dest[, opts] )
 
-Synchronously creates a `.gitignore` file in a specified `destination` directory.
+Synchronously create a `.gitignore` file in a specified `destination` directory.
 
 ``` javascript
 cp( 'path/to/a/directory' );
