@@ -118,7 +118,7 @@ $ gitignore
 # => creates a .gitignore file in the current working directory
 ```
 
-To specify a destination __different__ from the current working directory, provide a `destination`.
+To specify a destination other than the current working directory, provide a `destination`.
 
 ``` bash
 $ gitignore ./../some/other/directory
