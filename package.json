@@ -30,7 +30,8 @@
     "utils",
     "utility",
     "gitignore",
-    "dotfile"
+    "dotfile",
+    "cli"
   ],
   "bugs": {
     "url": "https://github.com/kgryte/gitignore/issues"
