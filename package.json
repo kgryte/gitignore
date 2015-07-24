@@ -1,5 +1,5 @@
 {
-  "name": "gitignore",
+  "name": "@kgryte/gitignore",
   "version": "0.0.0",
   "description": "Creates a .gitignore file.",
   "author": {
