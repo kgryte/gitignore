@@ -51,7 +51,7 @@ cp( 'path/to/a/directory', {
 Synchronously create a `.gitignore` file in a specified `destination` directory.
 
 ``` javascript
-cp( 'path/to/a/directory' );
+cp.sync( 'path/to/a/directory' );
 ```
 
 The function accepts the same `options` as the asynchronous version.
