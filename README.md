@@ -1,6 +1,6 @@
 .gitignore
 =========
-[![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coverage Status][coveralls-image]][coveralls-url] [![Dependencies][dependencies-image]][dependencies-url]
+[![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coverage Status][codecov-image]][codecov-url] [![Dependencies][dependencies-image]][dependencies-url]
 
 > Creates a `.gitignore` file.
 
@@ -171,8 +171,8 @@ Copyright &copy; 2015. Athan Reines.
 [travis-image]: http://img.shields.io/travis/kgryte/gitignore/master.svg
 [travis-url]: https://travis-ci.org/kgryte/gitignore
 
-[coveralls-image]: https://img.shields.io/coveralls/kgryte/gitignore/master.svg
-[coveralls-url]: https://coveralls.io/r/kgryte/gitignore?branch=master
+[codecov-image]: https://img.shields.io/codecov/c/github/kgryte/gitignore/master.svg
+[codecov-url]: https://codecov.io/github/kgryte/gitignore?branch=master
 
 [dependencies-image]: http://img.shields.io/david/kgryte/gitignore.svg
 [dependencies-url]: https://david-dm.org/kgryte/gitignore
