@@ -1,6 +1,6 @@
 {
   "name": "@kgryte/gitignore",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "description": "Creates a .gitignore file.",
   "author": {
     "name": "Athan Reines",
