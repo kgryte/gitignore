@@ -96,6 +96,12 @@ pids
 .Rapp.history
 .Rproj.user/
 
+# Python #
+##########
+__pycache__/
+*.py[cod]
+*$py.class
+
 # TeX #
 #######
 *.aux
